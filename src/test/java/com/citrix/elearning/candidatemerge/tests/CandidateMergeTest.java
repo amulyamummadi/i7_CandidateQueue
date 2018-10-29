@@ -1,6 +1,5 @@
 package com.citrix.elearning.candidatemerge.tests;
 
-
 import java.util.Date;
 
 import org.testng.annotations.Test;
@@ -48,8 +47,10 @@ public class CandidateMergeTest extends BaseTest {
 
 					final String dontApplyText = candidateReconciliationPage.getDontApplyText();
 					candidatePojo.setResult(dontApplyText);
+
 					candidateReconciliationPage.clickDontApply();
 					logger.info("Clicked on Don't apply");
+
 					candidateReconciliationPage.closeAlert();
 				} else if (inboundDate.compareTo(masterDate) > 0) {
 					final String applyText = candidateReconciliationPage.getApplyText();

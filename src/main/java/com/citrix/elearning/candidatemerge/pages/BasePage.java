@@ -77,7 +77,7 @@ public class BasePage {
 	 *
 	 * @param element
 	 *            {@link WebElement}
-	 * @return {@value text}
+	 * @return text
 	 */
 	public String getTextOfElement(WebElement element) {
 		String text = null;
@@ -93,7 +93,7 @@ public class BasePage {
 	 *
 	 * @param stringDate
 	 *            the element string format date to send
-	 * @return {@value date}
+	 * @return {@link Date}
 	 */
 	public Date stringToDateConversion(String stringDate, String dateFormat) {
 		final SimpleDateFormat simpledate = new SimpleDateFormat(dateFormat);
