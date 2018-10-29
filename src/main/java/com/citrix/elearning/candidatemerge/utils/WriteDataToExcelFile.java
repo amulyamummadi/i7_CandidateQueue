@@ -12,7 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 /**
  * This util class contains functionality of writing data from candidatePojoList
  * to excel file
- * 
+ *
  * @author amulya.mummadi
  *
  */
@@ -22,7 +22,7 @@ public class WriteDataToExcelFile {
 
 		FileOutputStream out;
 		try {
-			out = new FileOutputStream(new File("\\src\\test\\resource\\testdata\\output\\CandidateDetails.xlsx"));
+			out = new FileOutputStream(new File("\\src\\test\\resources\\testdata\\output\\CandidateDetails.xlsx"));
 			/**
 			 * To create a blank workbook
 			 */
