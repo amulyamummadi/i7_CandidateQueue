@@ -22,7 +22,7 @@ public class WriteDataToExcelFile {
 
 		FileOutputStream out;
 		try {
-			out = new FileOutputStream(new File("\\src\\test\\resources\\testdata\\output\\CandidateDetails.xlsx"));
+			out = new FileOutputStream(new File("\\src\\test\\resources\\testdata.output\\CandidateDetails.xlsx"));
 			/**
 			 * To create a blank workbook
 			 */
