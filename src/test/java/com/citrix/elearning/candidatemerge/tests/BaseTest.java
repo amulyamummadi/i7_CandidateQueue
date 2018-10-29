@@ -40,10 +40,10 @@ public class BaseTest {
 
 	private WebDriver getWebDriver(String browserName) {
 		if (browserName.equals("chrome")) {
-			System.setProperty("webdriver.chrome.driver", "src\\test\\resource\\binaries\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\binaries\\chromedriver.exe");
 			driver = new ChromeDriver();
 		} else {
-			System.setProperty("wedriver.gecko.driver", "src\\test\\resource\\binaries\\geckodriver.exe");
+			System.setProperty("wedriver.gecko.driver", "src\\test\\resources\\binaries\\geckodriver.exe");
 			driver = new FirefoxDriver();
 		}
 		return driver;
