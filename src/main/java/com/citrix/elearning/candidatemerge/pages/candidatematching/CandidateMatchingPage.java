@@ -54,7 +54,7 @@ public class CandidateMatchingPage extends BasePage {
 	/**
 	 * Method to get CandidateId
 	 *
-	 * @return CandidateId in string format
+	 * @return CandidateId
 	 */
 	public String getCandidateId() {
 		return candidateID.getText();

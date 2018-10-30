@@ -5,9 +5,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.citrix.elearning.candidatemerge.pages.BasePage;
 
 /**
  * This util class contains functionality of writing data from candidatePojoList
@@ -17,6 +20,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  */
 public class WriteDataToExcelFile {
+	public static Logger logger = Logger.getLogger(BasePage.class.getName());
 
 	public static void excelFile(List<CandidatePojo> candidateList) {
 
@@ -36,7 +40,7 @@ public class WriteDataToExcelFile {
 			headerRow.createCell(1).setCellValue("FirstName");
 			headerRow.createCell(2).setCellValue("Lastname");
 			headerRow.createCell(3).setCellValue("Result");
-			headerRow.createCell(4).setCellValue("failureResult");
+			headerRow.createCell(4).setCellValue("failureReason");
 
 			int rowNum = 1;
 			for (final CandidatePojo candidate : candidateList) {
@@ -48,7 +52,7 @@ public class WriteDataToExcelFile {
 				row.createCell(4).setCellValue(candidate.getFailureResult());
 				workbook.write(out);
 				out.close();
-				System.out.println("CandidateDetails.xlsx has been written successfully");
+				logger.info("CandidateDetails.xlsx has been written successfully");
 			}
 		} catch (final IOException e) {
 			e.printStackTrace();

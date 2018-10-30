@@ -55,7 +55,7 @@ public class CandidateQueuePage extends BasePage {
 	 *
 	 * @param num
 	 *            the element number to set
-	 * @return name in string format
+	 * @return name
 	 */
 	public String getName(int num) {
 		return getNamexPath(num).getText();
@@ -78,14 +78,14 @@ public class CandidateQueuePage extends BasePage {
 	 *
 	 * @param number
 	 *            the element number to set
-	 * @return QueuedDate in string format
+	 * @return {@link QueuedDate }
 	 */
 	public String getQueuedDate(int number) {
 		final String queuedDatexPath = "(//*[@id=\"candidateQueueDataTableForm:candQueueTable\"]/tbody/tr/td)[" + number
 				+ "]";
 		final WebElement stringQueued = driver.findElement(By.xpath(queuedDatexPath));
 		final String stringQueuedDate = stringQueued.getText();
-		System.out.println(stringQueuedDate);
+		logger.info("QueuedDate from CandidateQueue page" + stringQueuedDate);
 		return stringQueuedDate;
 	}
 
@@ -110,9 +110,9 @@ public class CandidateQueuePage extends BasePage {
 	 */
 	public void isDisplay() {
 		if (getQueuedDateAndName(numberParsed).isDisplayed()) {
-			System.out.println("Element is Visible");
+			logger.info("Element is Visible");
 		} else {
-			System.out.println("Element is InVisible");
+			logger.info("Element is InVisible");
 		}
 	}
 
@@ -124,7 +124,7 @@ public class CandidateQueuePage extends BasePage {
 	 */
 	public void searchTextboxAndSendName(int num) {
 		final String name = getNamexPath(num).getText();
-		logger.info(name);
+		logger.info("Name entered in textBox is=" + name);
 		searchTextboxxPath.sendKeys(name);
 	}
 }

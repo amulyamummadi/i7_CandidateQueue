@@ -103,13 +103,6 @@ public class CandidateReconciliationPage extends BasePage {
 	}
 
 	/**
-	 * method to close the Alert
-	 */
-	public void closeAlert() {
-		closePopup();
-	}
-
-	/**
 	 * Method to get AlternativeEmailText
 	 *
 	 * @return email text
@@ -155,7 +148,7 @@ public class CandidateReconciliationPage extends BasePage {
 	 */
 	public Date getInboundDate() {
 		explicitWait(stringInboundDate);
-		System.out.println(getTextOfElement(stringInboundDate));
+		logger.info("InboundDate in String format " + getTextOfElement(stringInboundDate));
 		final String inboundDate = getTextOfElement(stringInboundDate);
 		return stringToDateConversion(inboundDate, "MM/dd/yyyy hh:mm:ss");
 
@@ -177,7 +170,7 @@ public class CandidateReconciliationPage extends BasePage {
 	 */
 	public Date getMasterDate() {
 		explicitWait(stringMasterDate);
-
+		logger.info("MasterDate in String format " + getTextOfElement(stringInboundDate));
 		return stringToDateConversion(stringMasterDate.getText(), "MM/dd/yyyy hh:mm:ss");
 	}
 

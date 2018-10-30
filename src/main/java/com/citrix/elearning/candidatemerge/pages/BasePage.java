@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -34,6 +36,23 @@ public class BasePage {
 	}
 
 	/**
+	 * Method to accept the alert
+	 */
+	public void acceptAlert() {
+		new WebDriverWait(driver, 30).until(ExpectedConditions.alertIsPresent()).accept();
+	}
+
+	/**
+	 * Method to get alertText
+	 *
+	 * @return link text
+	 */
+	public String alertText() {
+		final Alert alert = driver.switchTo().alert();
+		return alert.getText();
+	}
+
+	/**
 	 * Method to clear and type the text.
 	 *
 	 * @param element
@@ -53,13 +72,8 @@ public class BasePage {
 	/**
 	 * Method to close the alerts
 	 */
-	public void closePopup() {
-		try {
-			new WebDriverWait(driver, 30).until(ExpectedConditions.alertIsPresent());
-			driver.switchTo().alert().dismiss();
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
+	public void closeAlert() {
+		driver.switchTo().alert().dismiss();
 	}
 
 	/**
@@ -86,6 +100,15 @@ public class BasePage {
 		} catch (final Exception e) {
 		}
 		return text;
+	}
+
+	public boolean isAlertPresent() {
+		try {
+			final Alert alert = driver.switchTo().alert();
+			return true;
+		} catch (final NoAlertPresentException Ex) {
+			return false;
+		}
 	}
 
 	/**

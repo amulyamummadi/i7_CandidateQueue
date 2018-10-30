@@ -3,6 +3,7 @@ package com.citrix.elearning.candidatemerge.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -54,11 +55,15 @@ public class BaseTest {
 	 */
 	@BeforeTest
 	public void setUp() {
+		BasicConfigurator.configure();
 		final String browser = PropertyUtil.getProperty("driver");
 		driver = getWebDriver(browser);
+		logger.info("Loading url");
 		driver.get(PropertyUtil.getProperty("url"));
 		final LoginPage loginPage = new LoginPage(driver);
+		logger.info("Entering login credentials");
 		findCandidatePage = loginPage.login(PropertyUtil.getProperty("username"), PropertyUtil.getProperty("password"));
+		logger.info("Clicking CandidateQueue Tab");
 		candidateQueuePage = findCandidatePage.clickCandidateQueue();
 	}
 
@@ -67,6 +72,7 @@ public class BaseTest {
 	 */
 	@AfterTest
 	public void tearDown() {
+		logger.info("Wrirting list of candidatepojo data to excel file");
 		WriteDataToExcelFile.excelFile(candidateList);
 		if (driver != null) {
 			driver.quit();
