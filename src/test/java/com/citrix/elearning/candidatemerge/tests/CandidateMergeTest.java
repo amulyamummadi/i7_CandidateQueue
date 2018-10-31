@@ -2,19 +2,23 @@ package com.citrix.elearning.candidatemerge.tests;
 
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.citrix.elearning.candidatemerge.pages.BasePage;
 import com.citrix.elearning.candidatemerge.utils.CandidatePojo;
 
 public class CandidateMergeTest extends BaseTest {
 	/**
-	 * Method to perform the actions after login and before logout
+	 * Method to perform the actions after login and before logout.
 	 */
 	@Test
 	public void recordClearing() {
+		final Logger logger = Logger.getLogger(BasePage.class);
 		final CandidatePojo candidatePojo = new CandidatePojo();
 		try {
-			logger.info("In candidateQueue page, getting name of the 1st record");
+			logger.info("In candidateQueue page, getting name of the 1st record.");
 			final String fullName = candidateQueuePage.getName(numberParsed);
 			final String[] str = fullName.split(",");
 			final String firstName = str[1];
@@ -24,97 +28,76 @@ public class CandidateMergeTest extends BaseTest {
 			candidatePojo.setLastName(lastName);
 			candidatePojo.setFirstName(firstName);
 
-			logger.info("Clicking on candidateQueue record");
+			logger.info("Clicking on candidate queue record.");
 			candidateMatchingPage = candidateQueuePage.clickQueueRecord(numberParsed);
 
-			logger.info("In CandidateMatching page, getting candidateId of the record ");
+			logger.info("Get candidate id from candidate matching page.");
 			final String candidateId = candidateMatchingPage.getCandidateId();
 			candidatePojo.setCandidateId(candidateId);
 
-			logger.info("Clicking on last name of the master record");
+			logger.info("Clicking on last name of the master record.");
 			candidateReconciliationPage = candidateMatchingPage.clickLastName();
 
-			logger.info("Getting emails of inbound and master records");
+			logger.info("Getting emails of inbound and master records.");
 			final String inboundEmailText = candidateReconciliationPage.getInboundEmailText();
-			logger.info("InboundEmailText=" + inboundEmailText);
+			logger.info("Inbound email text: " + inboundEmailText);
 			final String masterEmailText = candidateReconciliationPage.getMasterEmailText();
-			logger.info("MasterEmailText=" + masterEmailText);
+			logger.info("Master email text: " + masterEmailText);
 			final String alternativeEmailText = candidateReconciliationPage.getAlternativeEmailText();
-			logger.info("AlternativeEmailText=" + alternativeEmailText);
+			logger.info("Alternative email text: " + alternativeEmailText);
 
-			logger.info("Getting dates of inbound and master records");
+			logger.info("Getting dates of inbound and master records.");
 			final Date inboundDate = candidateReconciliationPage.getInboundDate();
-			logger.info("InboundDate in Date format=" + inboundDate);
+			logger.info("Inbound date in Date format: " + inboundDate);
 			final Date masterDate = candidateReconciliationPage.getMasterDate();
-			logger.info("MasterDate in Date format=" + masterDate);
+			logger.info("Master date in Date format: " + masterDate);
 
-			final boolean result = candidateReconciliationPage.isAlertPresent();
-			logger.info("Comparing emails and dates");
+			logger.info("Comparing inbound, master emails and last update dates.");
 			if (inboundEmailText.equals(masterEmailText) || inboundEmailText.equals(alternativeEmailText)) {
 				if (inboundDate.compareTo(masterDate) < 0 || inboundDate.compareTo(masterDate) == 0) {
 
 					final String dontApplyText = candidateReconciliationPage.getDontApplyText();
 					candidatePojo.setResult(dontApplyText);
 
-					logger.info("Clicking on Don't apply link");
+					logger.info("Clicking on Don't apply link.");
 					candidateReconciliationPage.clickDontApply();
-					if (result) {
-						final String applyLinkText = candidateReconciliationPage.alertText();
-						if (applyLinkText.equals(
-								"Please verify that you wish to update only the VUE record with the new data.")) {
-							candidateReconciliationPage.closeAlert();
-						} else {
-							candidateReconciliationPage.closeAlert();
-						}
-					}
+					candidateReconciliationPage.verifydontApplyLinkAlert();
 
 				} else if (inboundDate.compareTo(masterDate) > 0) {
 
 					final String applyText = candidateReconciliationPage.getApplyText();
 					candidatePojo.setResult(applyText);
 
-					logger.info("Clicking on apply link");
+					logger.info("Clicking on apply link.");
 					candidateReconciliationPage.clickApply();
-					if (result) {
-						final String applyLinkText = candidateReconciliationPage.alertText();
-						if (applyLinkText.equals(
-								"This inbound record has an older revision date than the Master Record.  The demographic information in the inbound record will not be applied to the Master Record.")) {
-							candidateReconciliationPage.closeAlert();
-						} else {
-							candidateReconciliationPage.closeAlert();
-						}
-					}
+					candidateReconciliationPage.verifyApplyLinkAlert();
 				}
 			} else {
 				final String createNewText = candidateReconciliationPage.getCreateNewText();
 				candidatePojo.setResult(createNewText);
 
-				logger.info("Clicking on CreateNew link");
+				logger.info("Clicking on create new link.");
 				candidateReconciliationPage.clickCreateNew();
-				if (result) {
-					final String createNewLinkText = candidateReconciliationPage.alertText();
-					if (createNewLinkText
-							.equals("Please verify that you wish to create a new candidate record with this data.")) {
-						candidateReconciliationPage.closeAlert();
-					} else {
-						candidateReconciliationPage.closeAlert();
-					}
-				}
+				candidateReconciliationPage.verifyCreateNewLinkAlert();
 			}
-			logger.info("Going back to CandidateQueue by clicking CandidateQueue tab");
+			logger.info("Going back to candidate queue by clicking candidate queue tab.");
 			findCandidatePage.clickCandidateQueue();
 
-			logger.info("Searching by Name");
+			logger.info("Searching by Name: " + candidateQueuePage.getName(numberParsed));
 			candidateQueuePage.searchTextboxAndSendName(numberParsed);
 
-			logger.info("By using combination of QueueDate and name,verifing whether record is there or not");
-			candidateQueuePage.isDisplay();
+			logger.info("Verify candidate record (candidate )is cleared from queue.");
+			final boolean nameAndQueuedDate = candidateQueuePage.isQueuedDateIsPresent();
+			Assert.assertTrue(nameAndQueuedDate);
+
+			logger.info("Clicking on candidate queue tab");
+			findCandidatePage.clickCandidateQueue();
 
 		} catch (final Exception e) {
-			logger.error("Error occured here");
-			candidatePojo.setFailureResult(e.getMessage());
+			logger.error("Error occured here.");
+			candidatePojo.setFailureReason(e.getMessage());
 		}
-		logger.info("Adding CandidatePojo to list");
+		logger.info("Adding candidate pojo to list.");
 		candidateList.add(candidatePojo);
 	}
 

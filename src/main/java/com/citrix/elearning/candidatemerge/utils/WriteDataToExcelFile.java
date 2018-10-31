@@ -13,8 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.citrix.elearning.candidatemerge.pages.BasePage;
 
 /**
- * This util class contains functionality of writing data from candidatePojoList
- * to excel file
+ * This util class contains functionality of writing data to excel.
  *
  * @author amulya.mummadi
  *
@@ -22,17 +21,23 @@ import com.citrix.elearning.candidatemerge.pages.BasePage;
 public class WriteDataToExcelFile {
 	public static Logger logger = Logger.getLogger(BasePage.class.getName());
 
+	/**
+	 * Method to write data to excel.
+	 *
+	 * @param candidateList
+	 *            the list of candidates data.
+	 */
 	public static void excelFile(List<CandidatePojo> candidateList) {
-
+		int rowNum = Integer.parseInt(PropertyUtil.getProperty("rowNum"));
 		FileOutputStream out;
 		try {
 			out = new FileOutputStream(new File("src\\test\\resources\\testdata\\output\\CandidateDetails.xlsx"));
 			/**
-			 * To create a blank workbook
+			 * To create a blank workbook.
 			 */
 			final XSSFWorkbook workbook = new XSSFWorkbook();
 			/**
-			 * To create a blank sheet
+			 * To create a blank sheet.
 			 */
 			final XSSFSheet sheet = workbook.createSheet("Candaidates");
 			final Row headerRow = sheet.createRow(0);
@@ -42,14 +47,13 @@ public class WriteDataToExcelFile {
 			headerRow.createCell(3).setCellValue("Result");
 			headerRow.createCell(4).setCellValue("failureReason");
 
-			int rowNum = 1;
 			for (final CandidatePojo candidate : candidateList) {
 				final Row row = sheet.createRow(rowNum++);
 				row.createCell(0).setCellValue(candidate.getCandidateId());
 				row.createCell(1).setCellValue(candidate.getFirstName());
 				row.createCell(2).setCellValue(candidate.getLastName());
 				row.createCell(3).setCellValue(candidate.getResult());
-				row.createCell(4).setCellValue(candidate.getFailureResult());
+				row.createCell(4).setCellValue(candidate.getFailureReason());
 				workbook.write(out);
 				out.close();
 				logger.info("CandidateDetails.xlsx has been written successfully");

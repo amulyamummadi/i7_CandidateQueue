@@ -22,13 +22,13 @@ import com.citrix.elearning.candidatemerge.utils.PropertyUtil;
 import com.citrix.elearning.candidatemerge.utils.WriteDataToExcelFile;
 
 /**
- * This Test class contains all actions
+ * This Test class contains all actions.
  *
  * @author amulya.mummadi
  *
  */
 public class BaseTest {
-	public static Logger logger = Logger.getLogger(BasePage.class.getName());
+	private static Logger logger = Logger.getLogger(BasePage.class);
 	protected WebDriver driver;
 	FindCandidatePage findCandidatePage;
 	CandidateQueuePage candidateQueuePage;
@@ -51,28 +51,31 @@ public class BaseTest {
 	}
 
 	/**
-	 * Method to setUp url and login details
+	 * Method to set up url and login details.
 	 */
 	@BeforeTest
 	public void setUp() {
 		BasicConfigurator.configure();
 		final String browser = PropertyUtil.getProperty("driver");
 		driver = getWebDriver(browser);
-		logger.info("Loading url");
-		driver.get(PropertyUtil.getProperty("url"));
+		final String url = PropertyUtil.getProperty("url");
+		logger.info("Loading url: " + url);
+		driver.get(url);
 		final LoginPage loginPage = new LoginPage(driver);
 		logger.info("Entering login credentials");
-		findCandidatePage = loginPage.login(PropertyUtil.getProperty("username"), PropertyUtil.getProperty("password"));
+		final String username = PropertyUtil.getProperty("username");
+		final String password = PropertyUtil.getProperty("password");
+		findCandidatePage = loginPage.login(username, password);
 		logger.info("Clicking CandidateQueue Tab");
 		candidateQueuePage = findCandidatePage.clickCandidateQueue();
 	}
 
 	/**
-	 * Method to exit from the site
+	 * Method to write excel data and close the browser.
 	 */
 	@AfterTest
 	public void tearDown() {
-		logger.info("Wrirting list of candidatepojo data to excel file");
+		logger.info("Writing data to excel file.");
 		WriteDataToExcelFile.excelFile(candidateList);
 		if (driver != null) {
 			driver.quit();

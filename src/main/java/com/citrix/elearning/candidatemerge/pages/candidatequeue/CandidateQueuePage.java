@@ -11,8 +11,8 @@ import com.citrix.elearning.candidatemerge.pages.candidatematching.CandidateMatc
 import com.citrix.elearning.candidatemerge.utils.PropertyUtil;
 
 /**
- * This page class contains finding a record from candidateQueue functionality
- * and getting full name,queued date of the respected record
+ * This page class contains functionality of finding a record from
+ * candidateQueue, getting full name and queued date of the respected record.
  *
  *
  * @author amulya.mummadi
@@ -26,7 +26,7 @@ public class CandidateQueuePage extends BasePage {
 	WebElement searchTextboxxPath;
 
 	/**
-	 * Constructor Initialization
+	 * Constructor Initialization.
 	 *
 	 * @param driver
 	 *            {@link WebDriver}
@@ -37,10 +37,10 @@ public class CandidateQueuePage extends BasePage {
 	}
 
 	/**
-	 * Method to select the record of CandidateQueuePage
+	 * Method to select the record of CandidateQueuePage.
 	 *
 	 * @param string
-	 *            the element number to be set
+	 *            the element number to be set.
 	 * @return {@link CandidateMatchingPage}
 	 */
 	public CandidateMatchingPage clickQueueRecord(int num) {
@@ -51,22 +51,22 @@ public class CandidateQueuePage extends BasePage {
 	}
 
 	/**
-	 * Method to get the name of the person in text format
+	 * Method to get the name of the person.
 	 *
 	 * @param num
-	 *            the element number to set
-	 * @return name
+	 *            the number to set.
+	 * @return name.
 	 */
 	public String getName(int num) {
 		return getNamexPath(num).getText();
 	}
 
 	/**
-	 * Method to get the xPath of the name location
+	 * Method to get the xPath of the name location.
 	 *
 	 * @param number
-	 *            the element number to set
-	 * @return web element of name
+	 *            the number to set.
+	 * @return web element of name.
 	 */
 	public WebElement getNamexPath(int number) {
 		final String Recordxpath = "(//tr//td[6])[" + number + "]/a";
@@ -74,10 +74,10 @@ public class CandidateQueuePage extends BasePage {
 	}
 
 	/**
-	 * method to get QueuedDate
+	 * Method to get Queued date.
 	 *
 	 * @param number
-	 *            the element number to set
+	 *            the number to set.
 	 * @return {@link QueuedDate }
 	 */
 	public String getQueuedDate(int number) {
@@ -85,16 +85,16 @@ public class CandidateQueuePage extends BasePage {
 				+ "]";
 		final WebElement stringQueued = driver.findElement(By.xpath(queuedDatexPath));
 		final String stringQueuedDate = stringQueued.getText();
-		logger.info("QueuedDate from CandidateQueue page" + stringQueuedDate);
+		logger.info("Queued date from candidate queue page" + stringQueuedDate);
 		return stringQueuedDate;
 	}
 
 	/**
-	 * Method to get combination of QueuedDate and Name
+	 * Method to get combination of Queued date and Name.
 	 *
 	 * @param number
-	 *            the element number to set
-	 * @return Web Element of Name And QueuedDate
+	 *            the number to set.
+	 * @return Web Element of Name And Queued date.
 	 */
 	public WebElement getQueuedDateAndName(int number) {
 		final String name = getName(numberParsed);
@@ -106,21 +106,17 @@ public class CandidateQueuePage extends BasePage {
 	}
 
 	/**
-	 * Method to say whether QueuedDateAndName is visible or not
+	 * Method to say whether Queued date and name is visible or not.
 	 */
-	public void isDisplay() {
-		if (getQueuedDateAndName(numberParsed).isDisplayed()) {
-			logger.info("Element is Visible");
-		} else {
-			logger.info("Element is InVisible");
-		}
+	public boolean isQueuedDateIsPresent() {
+		return getQueuedDateAndName(numberParsed).isDisplayed();
 	}
 
 	/**
-	 * Method to set name in SearchBox
+	 * Method to set name in SearchBox.
 	 *
 	 * @param num
-	 *            the element number to set
+	 *            the number to set.
 	 */
 	public void searchTextboxAndSendName(int num) {
 		final String name = getNamexPath(num).getText();

@@ -9,26 +9,26 @@ import com.citrix.elearning.candidatemerge.pages.BasePage;
 import com.citrix.elearning.candidatemerge.pages.candidatereconciliation.CandidateReconciliationPage;
 
 /**
- * This page class contains clicking on LastName of selected record and getting
- * candidateId
+ * This page class contains functionality of clicking on Lastname of selected
+ * record and getting candidate id.
  *
  * @author amulya.mummadi
  *
  */
 public class CandidateMatchingPage extends BasePage {
 	/**
-	 * Web Element for candidateId
+	 * Web Element for candidate id.
 	 */
 	@FindBy(xpath = "//tr[4]/td[9]")
 	WebElement candidateID;
 	/**
-	 * Web Element for LastNameLink
+	 * Web Element for lastname link.
 	 */
 	@FindBy(xpath = "//tr[4]/td[5]/a")
 	WebElement lastNameLink;
 
 	/**
-	 * Constructor Initialization
+	 * Constructor Initialization.
 	 *
 	 * @param driver
 	 *            {@link WebDriver}
@@ -41,7 +41,7 @@ public class CandidateMatchingPage extends BasePage {
 	}
 
 	/**
-	 * Method to click on the lastName of master_record.
+	 * Method to click on the lastname of master_record.
 	 *
 	 * @return {@link CandidateReconciliationPage}
 	 */
@@ -52,9 +52,9 @@ public class CandidateMatchingPage extends BasePage {
 	}
 
 	/**
-	 * Method to get CandidateId
+	 * Method to get candidate id.
 	 *
-	 * @return CandidateId
+	 * @return candidate id.
 	 */
 	public String getCandidateId() {
 		return candidateID.getText();

@@ -9,7 +9,7 @@ import com.citrix.elearning.candidatemerge.pages.BasePage;
 import com.citrix.elearning.candidatemerge.pages.candidatequeue.CandidateQueuePage;
 
 /**
- * This page class contains Selecting CandidateQueue tab functionality
+ * This page class contains Selecting CandidateQueue tab functionality.
  *
  * @author amulya.mummadi
  *
@@ -17,14 +17,14 @@ import com.citrix.elearning.candidatemerge.pages.candidatequeue.CandidateQueuePa
 public class FindCandidatePage extends BasePage {
 
 	/**
-	 * Web element for candidateQueueLink
+	 * Web element for candidateQueueLink.
 	 */
 
 	@FindBy(linkText = "Candidate Queue")
 	WebElement candidateQueueLink;
 
 	/**
-	 * constructor initialization
+	 * constructor initialization.
 	 *
 	 * @param driver
 	 *            {@link WebDriver}
@@ -35,7 +35,7 @@ public class FindCandidatePage extends BasePage {
 	}
 
 	/**
-	 * Method to select the CandidateQueueLink
+	 * Method to select the CandidateQueueLink.
 	 *
 	 * @return {@link CandidateQueuePage}
 	 */

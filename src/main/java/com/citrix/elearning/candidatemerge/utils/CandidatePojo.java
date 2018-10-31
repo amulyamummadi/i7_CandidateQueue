@@ -1,7 +1,7 @@
 package com.citrix.elearning.candidatemerge.utils;
 
 /**
- * This util class contains CandidatePojo
+ * This util class contains CandidatePojo.
  *
  * @author amulya.mummadi
  *
@@ -11,10 +11,10 @@ public class CandidatePojo {
 	String firstName;
 	String lastName;
 	String result;
-	String failureResult;
+	String failureReason;
 
 	/**
-	 * Method to get CandidateId
+	 * Method to get Candidate id.
 	 *
 	 * @return CandidateId
 	 */
@@ -24,79 +24,81 @@ public class CandidatePojo {
 	}
 
 	/**
-	 * Method to get FailureResult
+	 * Method to get failure reason.
 	 *
-	 * @return FailureResult
+	 * @return failure reason
 	 */
-	public String getFailureResult() {
-		return failureResult;
+	public String getFailureReason() {
+		return failureReason;
 	}
 
 	/**
-	 * Method to get FirstName
+	 * Method to get firstname.
 	 *
-	 * @return FirstName
+	 * @return firstname
 	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
 	/**
-	 * Method to get LastName
+	 * Method to get lastname.
 	 *
-	 * @return LastName
+	 * @return lastname
 	 */
 	public String getLastName() {
 		return lastName;
 	}
 
 	/**
-	 * Method to get Result
+	 * Method to get result.
 	 *
-	 * @return Result
+	 * @return result
 	 */
 	public String getResult() {
 		return result;
 	}
 
 	/**
-	 * Method to setCandidateId
+	 * Method to set candidate id.
 	 *
-	 * @param candidateID
+	 * @param candidate
+	 *            id
 	 */
 	public void setCandidateId(String candidateID) {
 		this.candidateID = candidateID;
 	}
 
 	/**
-	 * Method to set FailureResult
+	 * Method to set failure Reason.
 	 *
-	 * @param failureResult
+	 * @param failure
+	 *            Reason
 	 */
-	public void setFailureResult(String failureResult) {
-		this.failureResult = failureResult;
+	public void setFailureReason(String failureReason) {
+		this.failureReason = failureReason;
 	}
 
 	/**
-	 * ' Method to set FirstName
+	 * ' Method to set firstname.
 	 *
-	 * @param firstName
+	 * @param firstname
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
 	/**
-	 * Method to set LastName
+	 * Method to set lastname.
 	 *
-	 * @param lastName
+	 * @param lastname
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
 	/**
-	 * Method to set Result
+	 * Method to set result.
 	 *
 	 * @param result
 	 */

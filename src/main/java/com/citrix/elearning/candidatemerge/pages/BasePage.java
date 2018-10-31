@@ -13,6 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
+ * This class contains generic methods for all classes.
+ *
  * @author amulya.mummadi
  *
  */
@@ -39,11 +41,11 @@ public class BasePage {
 	 * Method to accept the alert
 	 */
 	public void acceptAlert() {
-		new WebDriverWait(driver, 30).until(ExpectedConditions.alertIsPresent()).accept();
+		driver.switchTo().alert().accept();
 	}
 
 	/**
-	 * Method to get alertText
+	 * Method to get alert text
 	 *
 	 * @return link text
 	 */
@@ -70,7 +72,7 @@ public class BasePage {
 	}
 
 	/**
-	 * Method to close the alerts
+	 * Method to close the alert
 	 */
 	public void closeAlert() {
 		driver.switchTo().alert().dismiss();
@@ -87,11 +89,11 @@ public class BasePage {
 	}
 
 	/**
-	 * Method to get the text from elements loacted
+	 * Method to get the text from elements located
 	 *
 	 * @param element
 	 *            {@link WebElement}
-	 * @return text
+	 * @return text of web element.
 	 */
 	public String getTextOfElement(WebElement element) {
 		String text = null;
@@ -102,9 +104,14 @@ public class BasePage {
 		return text;
 	}
 
+	/**
+	 * Method to verify alert is present or not.
+	 *
+	 * @return true/false
+	 */
 	public boolean isAlertPresent() {
 		try {
-			final Alert alert = driver.switchTo().alert();
+			driver.switchTo().alert();
 			return true;
 		} catch (final NoAlertPresentException Ex) {
 			return false;
@@ -112,10 +119,10 @@ public class BasePage {
 	}
 
 	/**
-	 * Method to Convert String format to Date format
+	 * Method to convert string format to date format.
 	 *
-	 * @param stringDate
-	 *            the element string format date to send
+	 * @param date
+	 *            string to send.
 	 * @return {@link Date}
 	 */
 	public Date stringToDateConversion(String stringDate, String dateFormat) {
